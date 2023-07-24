@@ -1,0 +1,49 @@
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func reNameVN(inputName []string, size int) string {
+	var firstName string
+	var lastName string
+
+	var result string
+
+	firstName = inputName[0]
+	lastName = inputName[1]
+
+	if size > 3 {
+		var middleName string
+		i := 2
+		for i < size-1 {
+			middleName += inputName[i]
+			i = i + 1
+			if i < size-1 {
+				middleName += " "
+			}
+		}
+		result = lastName + " " + middleName + " " + firstName
+	} else {
+		result = lastName + " " + firstName
+	}
+
+	return result
+}
+
+func main() {
+	args := os.Args[1:]
+
+	size := len(args)
+	countryCode := args[size-1]
+
+	switch countryCode {
+	case "US":
+		fmt.Print("Output: ", args)
+	case "VN":
+		fmt.Print("Output: " + reNameVN(args, size))
+	default:
+		fmt.Print("Country Code " + countryCode + " Invalid")
+	}
+}
